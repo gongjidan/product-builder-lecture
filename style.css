@@ -206,6 +206,16 @@ hr {
   color: #dc3545;
 }
 
+#comments-section {
+  margin-top: 2rem;
+}
+
+#comments-section h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+}
+
 /* Color classes for balls based on ranges (optional polish) */
 .range-1 { background-color: #fbc02d; color: #000; } /* 1-10 */
 .range-2 { background-color: #1976d2; color: #fff; } /* 11-20 */

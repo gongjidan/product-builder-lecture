@@ -11,48 +11,81 @@ document.addEventListener('DOMContentLoaded', () => {
 
   themeToggle.addEventListener('click', () => {
     const isLight = document.body.classList.contains('light');
-    const newTheme = isLight ? 'dark' : 'light';
-    
-    document.body.className = newTheme;
-    themeToggle.textContent = newTheme === 'light' ? 'Dark Mode' : 'Light Mode';
-    localStorage.setItem('theme', newTheme);
+    document.body.className = isLight ? 'dark' : 'light';
+    themeToggle.textContent = isLight ? 'Light Mode' : 'Dark Mode';
+    localStorage.setItem('theme', isLight ? 'dark' : 'light');
   });
 
   // Lotto Logic
-  function generateLottoNumbers() {
-    const numbers = new Set();
-    while (numbers.size < 6) {
+  generateBtn.addEventListener('click', () => {
+    const numbers = [];
+    while (numbers.length < 6) {
       const num = Math.floor(Math.random() * 45) + 1;
-      numbers.add(num);
+      if (!numbers.includes(num)) {
+        numbers.push(num);
+      }
     }
-    return Array.from(numbers).sort((a, b) => a - b);
-  }
+    numbers.sort((a, b) => a - b);
 
-  function getRangeClass(num) {
-    if (num <= 10) return 'range-1';
-    if (num <= 20) return 'range-2';
-    if (num <= 30) return 'range-3';
-    if (num <= 40) return 'range-4';
-    return 'range-5';
-  }
-
-  function updateUI() {
-    const newNumbers = generateLottoNumbers();
-    
     balls.forEach((ball, index) => {
-      // Add animation effect
-      ball.classList.remove('active');
-      ball.classList.remove('range-1', 'range-2', 'range-3', 'range-4', 'range-5');
-      
-      // Force reflow for animation
-      void ball.offsetWidth;
-
-      const num = newNumbers[index];
-      ball.textContent = num;
-      ball.classList.add(getRangeClass(num));
-      ball.classList.add('active');
+      ball.classList.remove('active', 'range-1', 'range-2', 'range-3', 'range-4', 'range-5');
+      setTimeout(() => {
+        const num = numbers[index];
+        ball.textContent = num;
+        ball.classList.add('active');
+        
+        // Add color range class
+        if (num <= 10) ball.classList.add('range-1');
+        else if (num <= 20) ball.classList.add('range-2');
+        else if (num <= 30) ball.classList.add('range-3');
+        else if (num <= 40) ball.classList.add('range-4');
+        else ball.classList.add('range-5');
+      }, index * 100);
     });
-  }
+  });
 
-  generateBtn.addEventListener('click', updateUI);
+  // Formspree AJAX Submission
+  const form = document.getElementById('partnership-form');
+  const status = document.getElementById('form-status');
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const submitBtn = document.getElementById('submit-btn');
+    
+    submitBtn.disabled = true;
+    submitBtn.textContent = '보내는 중...';
+    status.textContent = '';
+    status.className = '';
+
+    try {
+      const response = await fetch(event.target.action, {
+        method: form.method,
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        status.textContent = '문의가 성공적으로 전송되었습니다. 감사합니다!';
+        status.className = 'success';
+        form.reset();
+      } else {
+        const result = await response.json();
+        if (Object.hasOwnProperty.call(result, 'errors')) {
+          status.textContent = result.errors.map(error => error.message).join(', ');
+        } else {
+          status.textContent = '오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+        }
+        status.className = 'error';
+      }
+    } catch (error) {
+      status.textContent = '네트워크 오류가 발생했습니다.';
+      status.className = 'error';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = '문의하기';
+    }
+  });
 });

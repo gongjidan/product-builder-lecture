@@ -122,6 +122,90 @@ h1 {
   transform: scale(0.98);
 }
 
+/* Partnership Form Styles */
+hr {
+  margin: 2rem 0;
+  border: 0;
+  border-top: 1px solid var(--ball-bg);
+}
+
+#partnership-section {
+  text-align: left;
+  margin-top: 2rem;
+}
+
+#partnership-section h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid var(--ball-bg);
+  border-radius: 6px;
+  background-color: var(--container-bg);
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: 0.9rem;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--btn-bg);
+}
+
+.form-group textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+#submit-btn {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#submit-btn:hover {
+  background-color: var(--btn-hover);
+}
+
+#form-status {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+#form-status.success {
+  color: #28a745;
+}
+
+#form-status.error {
+  color: #dc3545;
+}
+
 /* Color classes for balls based on ranges (optional polish) */
 .range-1 { background-color: #fbc02d; color: #000; } /* 1-10 */
 .range-2 { background-color: #1976d2; color: #fff; } /* 11-20 */

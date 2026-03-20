@@ -1,1 +1,130 @@
-/* Add styles here */
+:root {
+  --bg-color: #f4f7f6;
+  --text-color: #333;
+  --header-bg: #fff;
+  --container-bg: #fff;
+  --ball-bg: #e0e0e0;
+  --ball-text: #333;
+  --btn-bg: #4a90e2;
+  --btn-text: #fff;
+  --btn-hover: #357abd;
+}
+
+body.dark {
+  --bg-color: #1a1a1a;
+  --text-color: #f4f7f6;
+  --header-bg: #2d2d2d;
+  --container-bg: #2d2d2d;
+  --ball-bg: #444;
+  --ball-text: #f4f7f6;
+  --btn-bg: #357abd;
+  --btn-text: #fff;
+  --btn-hover: #4a90e2;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  background-color: var(--container-bg);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  transition: background-color 0.3s;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+#theme-toggle {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 20px;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.2s;
+}
+
+#theme-toggle:hover {
+  background-color: var(--btn-hover);
+}
+
+#ball-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.ball {
+  width: 50px;
+  height: 50px;
+  background-color: var(--ball-bg);
+  color: var(--ball-text);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: transform 0.2s, background-color 0.3s, color 0.3s;
+  box-shadow: inset -3px -3px 5px rgba(0,0,0,0.1);
+}
+
+.ball.active {
+  transform: scale(1.1);
+}
+
+#generate-btn {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+#generate-btn:hover {
+  background-color: var(--btn-hover);
+}
+
+#generate-btn:active {
+  transform: scale(0.98);
+}
+
+/* Color classes for balls based on ranges (optional polish) */
+.range-1 { background-color: #fbc02d; color: #000; } /* 1-10 */
+.range-2 { background-color: #1976d2; color: #fff; } /* 11-20 */
+.range-3 { background-color: #d32f2f; color: #fff; } /* 21-30 */
+.range-4 { background-color: #7b1fa2; color: #fff; } /* 31-40 */
+.range-5 { background-color: #388e3c; color: #fff; } /* 41-45 */
